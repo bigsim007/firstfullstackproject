@@ -1,7 +1,5 @@
 package za.co.bigsim.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,12 +23,15 @@ public class ProjectTaskService {
 	@Autowired
 	private ProjectRepository projectRepository;
 	
-	public ProjectTask addProjectTask(String projectIdentifier, ProjectTask projectTask) {
+	@Autowired
+	private ProjectService projectService;
+	
+	public ProjectTask addProjectTask(String projectIdentifier, ProjectTask projectTask, String username) {
 		
         //Exceptions: Project not found
 
         //PTs to be added to a specific project, project != null, BL exists
-        Backlog backlog = backlogRepository.findByProjectIdentifier(projectIdentifier);
+        Backlog backlog = projectService.findProjectByIdentifier(projectIdentifier, username).getBacklog();
         
         if(backlog == null)
         	throw new ProjectNotFoundException("Project not found");

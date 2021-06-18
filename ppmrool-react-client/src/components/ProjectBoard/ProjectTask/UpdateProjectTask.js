@@ -17,6 +17,7 @@ class UpdateProjectTask extends Component {
             status: "",
             priority: "",
             dueDate: "",
+            created_At:"",
             projectIdentifier:"",
             errors:{}
           }
@@ -39,6 +40,7 @@ class UpdateProjectTask extends Component {
             status,
             priority,
             dueDate,
+            created_At,
             projectIdentifier
         } = nextProps.project_task;
 
@@ -50,6 +52,7 @@ class UpdateProjectTask extends Component {
             status,
             priority,
             dueDate,
+            created_At,
             projectIdentifier
         });
 
@@ -75,6 +78,7 @@ class UpdateProjectTask extends Component {
             status: this.state.status,
             priority: this.state.priority,
             dueDate: this.state.dueDate,
+            created_At:this.state.created_At,
             projectIdentifier: this.state.projectIdentifier
         }
 
@@ -101,7 +105,8 @@ class UpdateProjectTask extends Component {
                 Back to Project Board
               </a>
               <h4 className="display-4 text-center">Update Project Task</h4>
-              <p className="lead text-center">Project Name + Project Code</p>
+              <p className="lead text-center">Project Name: {this.state.projectIdentifier} |
+               Project Task ID: {this.state.projectSequence}</p>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
@@ -114,6 +119,9 @@ class UpdateProjectTask extends Component {
                     value={this.state.summary}
                     onChange={this.onChange}
                   />
+                  {errors.summary && (
+                    <div className="invalid-feedback">{errors.summary}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <textarea
